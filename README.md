@@ -14,3 +14,10 @@ Repositorio para almacenar las actividades relaciondas con la edición VI del M�
 - Programación Python para Machine Learning
 - Hacking y Pentesting con Python (Se incluyen los scripts del Master de Ciberseguridad)
 - Certificación PCAP
+
+## Extra:
+Recolección de scripts del Máster de Ciberseguridad en los siguientes lenguajes
+* Python
+* Ruby
+* Bash Scripting
+* PowerShell
