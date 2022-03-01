@@ -133,5 +133,5 @@ dmypy.json
 
 # Files
 *.txt
-!requirements.txt
+!*requirements.txt
 *.csv
