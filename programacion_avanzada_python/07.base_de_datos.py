@@ -12,8 +12,8 @@ Notas:
 - Es necesario descomentar (en caso de que lo estén) las líneas de código que se encuentran en la función main para que funcione
 
 Uso: 
-- Windows: python "base_de_datos.py"
-- Linux: python3 "base_de_datos.py"
+- Windows: python "07.base_de_datos.py"
+- Linux: python3 "07.base_de_datos.py"
 
 @autor: Víctor Luque Martín
 @fecha: 01-03-2022
