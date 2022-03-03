@@ -10,7 +10,7 @@ Uso:
 - Linux: python3 "09.paralelismo_y_concurrencia.py"
 
 @autor: Víctor Luque Martín
-@fecha: 27-02-2022
+@fecha: 03-03-2022
 @versión: 1.0
 @licencia: MIT
 @email: victorluque341@gmail.com
