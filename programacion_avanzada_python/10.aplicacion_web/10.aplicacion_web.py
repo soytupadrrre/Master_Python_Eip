@@ -1,5 +1,5 @@
 """
-Diseñando una aplicación web
+Diseñando una aplicación web con flask
 
 Script creado para la asignatura de Programación Avanzada en Python de la Escuela Internacional de Postgrados
 
