@@ -1,4 +1,4 @@
-#!/user/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Mostrar numeros enternos de 0 a un numero introducido por el usuario
