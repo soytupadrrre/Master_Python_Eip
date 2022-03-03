@@ -1,3 +1,18 @@
+"""
+Diseñando una aplicación web
+
+Script creado para la asignatura de Programación Avanzada en Python de la Escuela Internacional de Postgrados
+
+Uso: 
+- Windows: python "10.aplicacion_web.py"
+- Linux: python3 "10.aplicacion_web.py"
+
+@autor: Víctor Luque Martín
+@fecha: 03-03-2022
+@versión: 1.0
+@licencia: MIT
+@email: victorluque341@gmail.com
+"""
 from flask import Flask
 import socket
 import os
