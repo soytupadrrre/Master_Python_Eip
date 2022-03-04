@@ -24,7 +24,7 @@ Actividad relacionada: `07.base_de_datos.py`
 Actividades relacionadas: 
 * `08.manipulacion_de_datos\01.manipulacion_de_datos_txt.py`
 * `08.manipulacion_de_datos\02.manipulacion_de_datos_pandas.py`
-Dependencias requeridas: `pip install pandas`
+* Dependencias requeridas: `pip install pandas`
 
 ## Lección 9: Paralelismo y Concurrencia
 Actividad relacionada: `09.paralelismo_y_concurrencia.py`
