@@ -82,13 +82,22 @@ def index():
 
 # SHOW IRIS RESUME - GET
 @app.route("/iris/", methods=["GET"])
-def iris_data():
+def iris_resume():
     """
     Show the resume of the iris data
 
     :return: JSON with the resume of the iris data
     """
     return get_methods.get_iris_resume()
+
+@app.route("/iris/accuracy", methods=["GET"])
+def iris_accuracy():
+    """
+    Show the resume of the iris data
+
+    :return: JSON with the resume of the iris data
+    """
+    return get_methods.get_iris_accuracy()
 
 # INSERT DATA INTO IRIS - POST
 @app.route("/iris/insert-data/", methods=["POST"])
