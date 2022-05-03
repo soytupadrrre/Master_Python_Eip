@@ -3,7 +3,7 @@ Flask API REST
 
 Script creado para la asignatura de Creación de aplicaciones Python de la Escuela Internacional de Postgrados
 
-Uso: 
+Lanzamiento de la aplicación Flask: 
 - Windows:
     - Powershell:
         - $env:FLASK_APP = "flaskr"
@@ -18,29 +18,21 @@ Uso:
     - export FLASK_ENV=development
     - flask run
 
-@autor: Víctor Luque Martín
-@fecha: 20-04-2022
-@versión: 1.0
-@licencia: MIT
-@email: victorluque341@gmail.com
-"""
-from flask import Flask, request, redirect
-from .controller import get_methods, post_methods, put_methods, delete_methods
-
-# Methods available for the API
-# GET - Retrieve resume data
-# POST - Create a new record
-# PUT - Update an existing record (by ID or last row)
-# DELETE - Delete a record (by ID or last row)
-
-"""
-USE Examples as payloads for the requests
+Uso de la aplicación:
 /iris/insert-data = {
     "petal_length": 3.2, 
     "petal_width": 0.2, 
     "sepal_length": 5.2, 
     "sepal_width": 4.3, 
     "species": "setosa"
+}
+
+/iris/predict = {
+    "petal_length": 3.2, 
+    "petal_width": 0.2, 
+    "sepal_length": 5.2, 
+    "sepal_width": 4.3, 
+    "predict_model": "DecissionTree" / "RandomForest"
 }
 
 /iris/update-last-row = {
@@ -63,6 +55,25 @@ USE Examples as payloads for the requests
 /iris/delete-by-id = {
     "id": 193
 }
+
+@autor: Víctor Luque Martín
+@fecha: 20-04-2022
+@versión: 1.0
+@licencia: MIT
+@email: victorluque341@gmail.com
+"""
+from flask import Flask, request, redirect
+from .controller import get_methods, post_methods, put_methods, delete_methods
+
+# Methods available for the API
+# GET - Retrieve resume data
+# POST - Create a new record, predict and create a new record with the predicted species
+# PUT - Update an existing record (by ID or last row)
+# DELETE - Delete a record (by ID or last row)
+
+"""
+USE Examples as payloads for the requests
+
 """
 
 app = Flask(__name__)
@@ -108,6 +119,30 @@ def insert_data():
     :return: JSON with the new record inserted
     """
     return post_methods.insert_iris_data(request.data)
+
+# INSERT DATA AND PREDICT USING PREDICTION MODELS INTO IRIS - POST
+@app.route("/iris/predict/", methods=["POST"])
+def insert_predicted_data():
+    """
+    Insert a new record into the iris data
+
+    Valid predict models (case-insensitive):
+    - DecissionTree
+    - RandomForest
+
+    Example payload:
+    {
+        "petal_length": 3.2,
+        "petal_width": 0.2,
+        "sepal_length": 5.2,
+        "sepal_width": 4.3,
+        "predict_model": "DecissionTree"
+    }
+
+    :return: JSON with the new record inserted
+    """
+    return post_methods.insert_predicted_data(request.data)
+
 
 # UPDATE IRIS BY ID - PUT
 @app.route("/iris/update-by-id/", methods=["PUT"])
