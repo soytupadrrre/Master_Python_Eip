@@ -60,7 +60,7 @@ Predice la especie de una planta.
     "petal_width": 0.2, 
     "sepal_length": 5.2, 
     "sepal_width": 4.3, 
-    "predict_model": "DecissionTree" / "RandomForest"
+    "predict_model": "DecissionTree"
 }
 ```
 ### MÉTODO PUT
