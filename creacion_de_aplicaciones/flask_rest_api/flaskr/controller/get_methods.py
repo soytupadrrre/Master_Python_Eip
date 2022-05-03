@@ -16,7 +16,7 @@ def get_iris_accuracy():
     response = {}
     iris_df = pd.read_csv("iris.csv")
     response["species"] = iris_df.species.value_counts().to_dict()
-    results = iris.obtain_results(iris_df)
+    results = iris.predict_results(iris_df)
     response["algorithms"] = []
     for result in results:
         template = {"name": result[3], "results": {
@@ -31,3 +31,4 @@ if __name__ == "__main__":
     print(get_iris_accuracy())
     print("\n\n")
     print(get_iris_resume())
+    
