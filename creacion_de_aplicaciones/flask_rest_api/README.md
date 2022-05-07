@@ -2,10 +2,14 @@
 Script creado para la asignatura de Creación de aplicaciones Python de la Escuela Internacional de Postgrados, lección 8.
 
 ## Autor
-* Nombre: Víctor Luque Martín<br>
-* Fecha: 07-05-2022<br>
-* Versión: 1.0<br>
-* Email: [victorluque341@gmail.com](mailto:victorluque341@gmail.com)
+* nombre: Víctor Luque Martín<br>
+* fecha: 07-05-2022<br>
+* versión: 1.0<br>
+* email: [victorluque341@gmail.com](mailto:victorluque341@gmail.com)
+
+## Comprobación funcionamiento de la aplicación:
+1. Lanzar aplicación Flask
+2. Ejecutar los tests dentro del fichero test/flask_api_test.py
 
 ## Lanzamiento de la aplicación Flask: 
 - Windows:
@@ -25,16 +29,20 @@ Script creado para la asignatura de Creación de aplicaciones Python de la Escue
 ## Rutas de la aplicación:
 
 ### MÉTODO GET
-#### Ruta: /iris/
+
+#### Ruta: /api/iris/
+Muestra todos los datos de Iris Dataset.
+
+#### Ruta: /api/iris/describe
 Devuelve un resumen de los datos contenidos en Iris.csv
 
-#### Ruta: /iris/accuracy
+#### Ruta: /api/iris/accuracy
 Devuelve los datos de precision de los modelos de predicción implementados en la aplicación ademas de los datos de cada especie:
 - Decission Tree Classifier 
 - Random Forest Classifier
 
 ### MÉTODO POST
-#### Ruta: /iris/insert-data
+#### Ruta: /api/iris/insert
 Inserta una nueva fila en la tabla iris.
 - Parámetros:
     - petal_length (float): Longitud del pétalo.
@@ -52,7 +60,7 @@ Inserta una nueva fila en la tabla iris.
 }
 ```
 
-### Ruta: /iris/predict
+### Ruta: /api/iris/predict
 Predice la especie de una planta.
 - Parámetros:
     - petal_length (float): Longitud del pétalo.
@@ -70,7 +78,7 @@ Predice la especie de una planta.
 }
 ```
 ### MÉTODO PUT
-#### Ruta: /iris/update-last-row
+#### Ruta: /api/iris/update-last
 Actualiza la última fila de la tabla iris.
 ```json
 {
@@ -82,7 +90,7 @@ Actualiza la última fila de la tabla iris.
 }
 ```
 
-#### Ruta: /iris/update-by-id
+#### Ruta: /api/iris/update
 Actualiza una fila de la tabla iris dado un id.
 ```json
 {
@@ -95,10 +103,10 @@ Actualiza una fila de la tabla iris dado un id.
 }
 ```
 ### MÉTODO DELETE
-#### Ruta: /iris/delete-last
+#### Ruta: /api/iris/delete-last
 Elimina la última fila de la tabla iris.
 
-#### Ruta: /iris/delete-by-id
+#### Ruta: /api/iris/delete
 Elimina una fila de la tabla iris dado un id.
 ```json
 {
