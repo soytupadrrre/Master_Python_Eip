@@ -12,7 +12,9 @@ Script creado para la asignatura de Creación de aplicaciones Python de la Escue
 2. Ejecutar los tests dentro del fichero test/fastapi_test.py
 
 ## Lanzamiento de la aplicación FastAPI: 
-- uvicorn main:app --reload
+```powershell
+uvicorn main:app --reload
+```
 
 ## Rutas de la aplicación:
 
