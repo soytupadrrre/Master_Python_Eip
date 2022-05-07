@@ -2,10 +2,10 @@
 Script creado para la asignatura de Creación de aplicaciones Python de la Escuela Internacional de Postgrados, lección 8.
 
 ## Autor
-* nombre: Víctor Luque Martín<br>
-* fecha: 07-05-2022<br>
-* versión: 1.0<br>
-* email: [victorluque341@gmail.com](mailto:victorluque341@gmail.com)
+* Nombre: Víctor Luque Martín<br>
+* Fecha: 07-05-2022<br>
+* Versión: 1.0<br>
+* Email: [victorluque341@gmail.com](mailto:victorluque341@gmail.com)
 
 ## Lanzamiento de la aplicación Flask: 
 - Windows:
