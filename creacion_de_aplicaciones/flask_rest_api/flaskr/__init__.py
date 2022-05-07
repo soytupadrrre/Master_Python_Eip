@@ -20,7 +20,7 @@ Lanzamiento de la aplicación Flask:
     - flask run
 
 @autor: Víctor Luque Martín
-@fecha: 20-04-2022
+@fecha: 07-05-2022
 @versión: 1.0
 @licencia: MIT
 @email: victorluque341@gmail.com
