@@ -45,6 +45,7 @@ Página con una tabla con el resumen de los datos de la base de datos.
 Página que muestra la precisión de los modelos Machine Learning.
 La precisión se calcula con los datos dentro de Iris Dataset, con un 80% de los datos empleados como entrenamiento y un 20% como prueba (train y test).
 Los resultados varían en función de la predicción de los modelos.
+
 ![iris](img/acc_1.png)
 ![iris](img/acc_2.png)
 
