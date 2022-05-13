@@ -58,6 +58,7 @@ Página con un formulario para insertar datos en la base de datos.
 
 ### Predecir e Insertar datos
 Página con un formulario para insertar datos en la base de datos y una tabla con los resultados de la predicción.
+
 ![iris](img/predict_data.png)
 
 ### Actualizar último dato
@@ -70,10 +71,12 @@ Página con un formulario para actualizar un dato de la base de datos por su ID.
 
 ### Eliminar último dato
 Página con un formulario para eliminar el último dato de la base de datos.
+
 ![iris](img/delete_last.png)
 
 ### Eliminar dato por IDs
 Página con un formulario para eliminar un dato de la base de datos por su ID.
+
 ![iris](img/delete_by_id.png)
 
 ## Notas:
