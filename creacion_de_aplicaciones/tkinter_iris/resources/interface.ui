@@ -1,0 +1,1477 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.2">
+  <object class="tk.Toplevel" id="home">
+    <property name="height">520</property>
+    <property name="title" translatable="yes">Victor Luque - Tkinter</property>
+    <property name="width">720</property>
+    <child>
+      <object class="pygubu.builder.widgets.toplevelmenu" id="toplevelmenu1">
+        <child>
+          <object class="tk.Menu" id="main_menu">
+            <property name="takefocus">true</property>
+            <property name="tearoff">false</property>
+            <property name="title" translatable="yes">Menu</property>
+            <child>
+              <object class="tk.Menuitem.Submenu" id="show_submenu">
+                <property name="columnbreak">false</property>
+                <property name="font">TkTextFont</property>
+                <property name="label" translatable="yes">Show</property>
+                <property name="state">normal</property>
+                <property name="tearoff">false</property>
+                <child>
+                  <object class="tk.Menuitem.Command" id="view_all_data_menu">
+                    <property name="command" type="command" cbtype="simple">open_all_data_view</property>
+                    <property name="label" translatable="yes">View all data</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="tk.Menuitem.Command" id="view_resume_menu">
+                    <property name="command" type="command" cbtype="simple">open_resume_view</property>
+                    <property name="label" translatable="yes">View resume</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="tk.Menuitem.Command" id="view_accuracy_menu">
+                    <property name="command" type="command" cbtype="simple">open_accuracy_view</property>
+                    <property name="label" translatable="yes">View Accuracy</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="tk.Menuitem.Command" id="view_flower_menu">
+                    <property name="command" type="command" cbtype="simple">open_flower_view</property>
+                    <property name="label" translatable="yes">View Flower Graphs</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Menuitem.Submenu" id="insert_submenu">
+                <property name="hidemargin">false</property>
+                <property name="label" translatable="yes">Insert</property>
+                <property name="takefocus">false</property>
+                <property name="tearoff">false</property>
+                <child>
+                  <object class="tk.Menuitem.Command" id="insert_data_menu">
+                    <property name="command" type="command" cbtype="simple">open_insert_data_view</property>
+                    <property name="label" translatable="yes">Insert Data</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="tk.Menuitem.Command" id="insert_predict_menu">
+                    <property name="command" type="command" cbtype="simple">open_predict_data_view</property>
+                    <property name="label" translatable="yes">insert_predict</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Menuitem.Submenu" id="update_submenu">
+                <property name="label" translatable="yes">Update</property>
+                <property name="tearoff">false</property>
+                <child>
+                  <object class="tk.Menuitem.Command" id="update_last_menu">
+                    <property name="command" type="command" cbtype="simple">open_update_last_view</property>
+                    <property name="label" translatable="yes">Update last row</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="tk.Menuitem.Command" id="update_by_id_menu">
+                    <property name="command" type="command" cbtype="simple">open_update_by_id_view</property>
+                    <property name="label" translatable="yes">Update by ID</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Menuitem.Submenu" id="delete_submenu">
+                <property name="hidemargin">false</property>
+                <property name="label" translatable="yes">Delete</property>
+                <property name="state">normal</property>
+                <property name="tearoff">false</property>
+                <child>
+                  <object class="tk.Menuitem.Command" id="delete_last_menu">
+                    <property name="command" type="command" cbtype="simple">open_delete_last_view</property>
+                    <property name="label" translatable="yes">Delete last row</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="tk.Menuitem.Command" id="delete_by_id_menu">
+                    <property name="command" type="command" cbtype="simple">open_delete_by_id_view</property>
+                    <property name="label" translatable="yes">Delete by ID</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Label" id="home_header">
+        <property name="font">{Calibri} 16 {}</property>
+        <property name="text" translatable="yes">Bienvenido a Victor Luque's Tkinter Iris App</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">10</property>
+          <property name="pady">10</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Text" id="text1">
+        <property name="height">27</property>
+        <property name="insertunfocussed">hollow</property>
+        <property name="padx">10</property>
+        <property name="pady">10</property>
+        <property name="relief">groove</property>
+        <property name="setgrid">true</property>
+        <property name="state">disabled</property>
+        <property name="tabstyle">wordprocessor</property>
+        <property name="takefocus">false</property>
+        <property name="text" translatable="yes">Esta aplicación permite interactuar y visualizar información contenida en Iris Dataset.
+
+Desde el menú de navegacion es posible acceder a las diferentes páginas de la aplicación.
+
+Las páginas son:
+
+- Show:
+  * Mostrar todos los datos
+  * Mostrar el resumen
+  * Mostrar la precisión
+  * Mostrar un gráfico de puntos de la información de las longitudes
+  * Mostrar un gráfico de puntos de la información de las anchuras
+
+- Insert:
+  * Insertar nuevos datos al Iris dataset
+  * Insertar datos y predecir el resultado
+
+- Update:
+  * Actualizar la última fila de Iris Dataset
+  * Actualizar una fila especificando un ID
+
+- Delete:
+  * Elimar el último registro de Iris Dataset
+  * Eliminar un registro especificando un ID
+</property>
+        <property name="undo">false</property>
+        <property name="wrap">word</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object class="tk.Toplevel" id="all_data_view">
+    <property name="height">200</property>
+    <property name="width">200</property>
+    <child>
+      <object class="tk.Label" id="all_data_header">
+        <property name="font">{Calibri} 16 {}</property>
+        <property name="justify">center</property>
+        <property name="text" translatable="yes">Datos dentro de Iris Dataset</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">10</property>
+          <property name="pady">10</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Treeview" id="treeview5">
+        <property name="selectmode">extended</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object class="tk.Toplevel" id="resume_view">
+    <property name="height">200</property>
+    <property name="width">200</property>
+    <child>
+      <object class="tk.Label" id="resume_header">
+        <property name="font">{Calibri} 16 {}</property>
+        <property name="justify">center</property>
+        <property name="text" translatable="yes">Resumen Datos Iris Dataset</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">10</property>
+          <property name="pady">10</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Text" id="text2">
+        <property name="height">7</property>
+        <property name="padx">10</property>
+        <property name="pady">10</property>
+        <property name="setgrid">true</property>
+        <property name="state">normal</property>
+        <property name="text" translatable="yes">El resumen de los datos consta de:
+
+- El número de elementos que tiene cada columna
+- La media de los campos numéricos
+- La desviacion de los campos numéricos
+- El mínimo y máximo de los campos numéricos
+- El 25%, 50% y 75% de los campos nméricos</property>
+        <property name="width">50</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.OptionMenu" id="resume_options">
+        <property name="command" type="command" cbtype="simple">resume_options_command</property>
+        <property name="value">Opciones</property>
+        <property name="values">total,media,desviación,minimo,25,50,75,máximo</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame2">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">4</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="0" name="pad">10</property>
+          <property type="col" id="all" name="pad">10</property>
+          <property type="row" id="0" name="pad">10</property>
+          <property type="row" id="all" name="pad">10</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Entry" id="entry1">
+            <property name="takefocus">true</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:sepal_length_resume</property>
+            <property name="validate">none</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="resume_label_2">
+            <property name="text" translatable="yes">Sepal Width:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry2">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:sepal_width_resume</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="resume_label_3">
+            <property name="text" translatable="yes">Petal Length:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">3</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry3">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:petal_length_resume</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">3</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="resume_label_4">
+            <property name="text" translatable="yes">Petal Length:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">4</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry4">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:petal_width_resume</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">4</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="resume_label_1">
+            <property name="compound">top</property>
+            <property name="relief">flat</property>
+            <property name="text" translatable="yes">Sepal Length:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Label" id="label8">
+        <property name="anchor">center</property>
+        <property name="font">{Calibri} 14 {}</property>
+        <property name="justify">center</property>
+        <property name="pady">10</property>
+        <property name="takefocus">false</property>
+        <property name="text" translatable="yes">Totales</property>
+        <property name="textvariable">string:resume_option_title</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">3</property>
+          <property name="sticky">ew</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object class="tk.Toplevel" id="accuracy_view">
+    <property name="height">200</property>
+    <property name="width">200</property>
+    <child>
+      <object class="tk.Label" id="label9">
+        <property name="font">{Calibri} 16 {}</property>
+        <property name="text" translatable="yes">Precisión Algoritmos Machine Learning</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">10</property>
+          <property name="pady">10</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Text" id="text3">
+        <property name="height">3</property>
+        <property name="insertunfocussed">none</property>
+        <property name="padx">10</property>
+        <property name="pady">10</property>
+        <property name="state">disabled</property>
+        <property name="takefocus">false</property>
+        <property name="text" translatable="yes">En esta sección se muestra la precisión de los algoritmos DecisionTree y RandomForest sobre Iris Dataset</property>
+        <property name="undo">true</property>
+        <property name="width">50</property>
+        <property name="wrap">word</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">1</property>
+          <property name="sticky">ew</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame6">
+        <property name="height">10</property>
+        <property name="width">10</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">2</property>
+          <property name="sticky">n</property>
+        </layout>
+        <child>
+          <object class="tk.Frame" id="frame4">
+            <property name="height">10</property>
+            <property name="width">10</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
+            <containerlayout manager="grid">
+              <property type="row" id="all" name="pad">20</property>
+            </containerlayout>
+            <child>
+              <object class="tk.Label" id="label10">
+                <property name="compound">top</property>
+                <property name="font">{Calibri} 14 {}</property>
+                <property name="justify">center</property>
+                <property name="relief">flat</property>
+                <property name="text" translatable="yes">Decission Tree Classifier
+Accuracy</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Entry" id="entry5">
+                <property name="text" translatable="yes">0</property>
+                <property name="textvariable">string:dtc_accuracy</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="row">1</property>
+                  <property name="sticky">n</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Frame" id="frame5">
+            <property name="height">10</property>
+            <property name="width">10</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="row">0</property>
+              <property name="sticky">n</property>
+            </layout>
+            <containerlayout manager="grid">
+              <property type="row" id="all" name="pad">20</property>
+            </containerlayout>
+            <child>
+              <object class="tk.Label" id="label11">
+                <property name="font">{Calibri} 14 {}</property>
+                <property name="text" translatable="yes">Random Tree Classifier
+Accuracy</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Entry" id="entry6">
+                <property name="text" translatable="yes">0</property>
+                <property name="textvariable">string:rtf_accuracy</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="row">1</property>
+                  <property name="sticky">n</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Separator" id="separator2">
+            <property name="orient">vertical</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="ipady">40</property>
+              <property name="padx">10</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="tk.Toplevel" id="length_plot_view">
+    <property name="height">200</property>
+    <property name="title" translatable="yes">Lengths View</property>
+    <property name="width">200</property>
+    <child>
+      <object class="tk.Label" id="label16">
+        <property name="font">{Calibri} 16 {}</property>
+        <property name="text" translatable="yes">Gráficos de la longitud del Sépalo y del Pétalo</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">10</property>
+          <property name="pady">10</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame8">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">1</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">20</property>
+          <property type="row" id="all" name="pad">20</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Button" id="sepal_length_plot_btn">
+            <property name="command" type="command" cbtype="simple">show_sepal_length_plot</property>
+            <property name="text" translatable="yes">Ver Sepal Length</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Button" id="petal_length_plot_btn">
+            <property name="command" type="command" cbtype="simple">show_petal_length_plot</property>
+            <property name="text" translatable="yes">Ver Petal Length</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="tk.Toplevel" id="width_plot_view">
+    <property name="height">200</property>
+    <property name="title" translatable="yes">Widths View</property>
+    <property name="width">200</property>
+    <child>
+      <object class="tk.Label" id="label17">
+        <property name="font">{Calibri} 16 {}</property>
+        <property name="text" translatable="yes">Gráficos de la longitud del Sépalo y del Pétalo</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame9">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">1</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">20</property>
+          <property type="row" id="all" name="pad">20</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Button" id="sepal_width_plot_btn">
+            <property name="command" type="command" cbtype="simple">show_sepal_width_plot</property>
+            <property name="text" translatable="yes">Ver Sepal Width</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Button" id="petal_width_plot_btn">
+            <property name="command" type="command" cbtype="simple">show_petal_width_plot</property>
+            <property name="text" translatable="yes">Ver Petal Width</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="tk.Toplevel" id="insert_view">
+    <property name="height">200</property>
+    <property name="width">200</property>
+    <child>
+      <object class="tk.Frame" id="frame7">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">10</property>
+          <property name="row">1</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">10</property>
+          <property type="row" id="all" name="pad">10</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Entry" id="entry7">
+            <property name="takefocus">true</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:sepal_length_resume</property>
+            <property name="validate">none</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label12">
+            <property name="text" translatable="yes">Sepal Width:</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry8">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:sepal_width_resume</property>
+            <layout manager="grid">
+              <property name="column">3</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label13">
+            <property name="text" translatable="yes">Petal Length:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry9">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:petal_length_resume</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label14">
+            <property name="text" translatable="yes">Petal Length:</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry10">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:petal_width_resume</property>
+            <layout manager="grid">
+              <property name="column">3</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label15">
+            <property name="compound">top</property>
+            <property name="relief">flat</property>
+            <property name="text" translatable="yes">Sepal Length:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Label" id="label18">
+        <property name="font">{Calibri} 16 {}</property>
+        <property name="text" translatable="yes">Insertar datos en Iris Dataset</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">10</property>
+          <property name="pady">10</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame10">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">2</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">20</property>
+          <property type="row" id="all" name="pad">20</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Label" id="label19">
+            <property name="text" translatable="yes">Species:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry11">
+            <property name="text" translatable="yes">example</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label44">
+            <property name="text" translatable="yes">ID:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry31">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:predicted_result</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame11">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">3</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">30</property>
+          <property type="row" id="all" name="pad">15</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Button" id="insert_clear_btn">
+            <property name="command" type="command" cbtype="simple">clear_data</property>
+            <property name="text" translatable="yes">Limpiar</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Button" id="insert_post_btn">
+            <property name="command" type="command" cbtype="simple">send_data</property>
+            <property name="text" translatable="yes">Enviar</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="tk.Toplevel" id="predict_view">
+    <property name="height">0</property>
+    <property name="width">0</property>
+    <child>
+      <object class="tk.Label" id="label20">
+        <property name="font">{Calibri} 16 {}</property>
+        <property name="justify">center</property>
+        <property name="text" translatable="yes">Predecir datos en Iris Dataset</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">10</property>
+          <property name="pady">10</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame12">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">2</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">15</property>
+          <property type="row" id="all" name="pad">15</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Label" id="label21">
+            <property name="text" translatable="yes">Classifier:
+(DecissionTree | RandomForest)</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry12">
+            <property name="text" translatable="yes">DecissionTree</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label27">
+            <property name="text" translatable="yes">ID:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="predicted_result_btn">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:predicted_result</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame13">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">4</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">30</property>
+          <property type="row" id="all" name="pad">15</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Button" id="button8">
+            <property name="command" type="command" cbtype="simple">clear_data</property>
+            <property name="text" translatable="yes">Limpiar</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Button" id="button9">
+            <property name="command" type="command" cbtype="simple">send_data</property>
+            <property name="text" translatable="yes">Enviar</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame14">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">10</property>
+          <property name="row">1</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">10</property>
+          <property type="row" id="all" name="pad">10</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Entry" id="entry13">
+            <property name="takefocus">true</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:sepal_length_resume</property>
+            <property name="validate">none</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label22">
+            <property name="text" translatable="yes">Sepal Width:</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry14">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:sepal_width_resume</property>
+            <layout manager="grid">
+              <property name="column">3</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label23">
+            <property name="text" translatable="yes">Petal Length:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry15">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:petal_length_resume</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label24">
+            <property name="text" translatable="yes">Petal Length:</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry16">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:petal_width_resume</property>
+            <layout manager="grid">
+              <property name="column">3</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label25">
+            <property name="compound">top</property>
+            <property name="relief">flat</property>
+            <property name="text" translatable="yes">Sepal Length:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="tk.Toplevel" id="update_last_view">
+    <property name="height">200</property>
+    <property name="width">200</property>
+    <child>
+      <object class="tk.Frame" id="frame17">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">1</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">10</property>
+          <property type="row" id="all" name="pad">10</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Entry" id="entry_ul_spl">
+            <property name="takefocus">true</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:sepal_length_resume</property>
+            <property name="validate">none</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label28">
+            <property name="text" translatable="yes">Sepal Width:</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry_ul_spw">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:sepal_width_resume</property>
+            <layout manager="grid">
+              <property name="column">3</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label29">
+            <property name="text" translatable="yes">Petal Length:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry_ul_ptl">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:petal_length_resume</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label30">
+            <property name="text" translatable="yes">Petal Width</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry_ul_ptw">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:petal_width_resume</property>
+            <layout manager="grid">
+              <property name="column">3</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label31">
+            <property name="compound">top</property>
+            <property name="relief">flat</property>
+            <property name="text" translatable="yes">Sepal Length:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Label" id="label32">
+        <property name="font">{Calibri} 16 {}</property>
+        <property name="text" translatable="yes">Actualizar última fila en Iris Dataset</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">10</property>
+          <property name="pady">10</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame18">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">2</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">20</property>
+          <property type="row" id="all" name="pad">20</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Label" id="label33">
+            <property name="text" translatable="yes">Species:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry23">
+            <property name="state">normal</property>
+            <property name="text" translatable="yes">example</property>
+            <property name="textvariable">string:entry_species</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame19">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">3</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">30</property>
+          <property type="row" id="all" name="pad">15</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Button" id="button10">
+            <property name="command" type="command" cbtype="simple">clear_data</property>
+            <property name="text" translatable="yes">Limpiar</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Button" id="button11">
+            <property name="command" type="command" cbtype="simple">send_data</property>
+            <property name="text" translatable="yes">Enviar</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="tk.Toplevel" id="update_id_view">
+    <property name="height">200</property>
+    <property name="width">200</property>
+    <child>
+      <object class="tk.Label" id="label34">
+        <property name="font">{Calibri} 16 {}</property>
+        <property name="text" translatable="yes">Actualizar en Iris Dataset</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">10</property>
+          <property name="pady">10</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame20">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">1</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">20</property>
+          <property type="row" id="all" name="pad">15</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Label" id="label35">
+            <property name="text" translatable="yes">ID:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry_u_id">
+            <property name="font">TkDefaultFont</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:id_field_value</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame21">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">2</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">10</property>
+          <property type="row" id="all" name="pad">10</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Entry" id="entry_u_spl">
+            <property name="takefocus">true</property>
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:sepal_length_resume</property>
+            <property name="validate">none</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label36">
+            <property name="text" translatable="yes">Sepal Width:</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry_u_spw">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:sepal_width_resume</property>
+            <layout manager="grid">
+              <property name="column">3</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label37">
+            <property name="text" translatable="yes">Petal Length:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry_u_ptl">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:petal_length_resume</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label38">
+            <property name="text" translatable="yes">Petal Length:</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry_u_ptw">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">string:petal_width_resume</property>
+            <layout manager="grid">
+              <property name="column">3</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Label" id="label39">
+            <property name="compound">top</property>
+            <property name="relief">flat</property>
+            <property name="text" translatable="yes">Sepal Length:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame22">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">3</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">20</property>
+          <property type="row" id="all" name="pad">20</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Label" id="label40">
+            <property name="text" translatable="yes">Species:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry_u_species">
+            <property name="text" translatable="yes">example</property>
+            <property name="textvariable">string:species_resume</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame23">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">4</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">30</property>
+          <property type="row" id="all" name="pad">15</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Button" id="button12">
+            <property name="command" type="command" cbtype="simple">clear_data</property>
+            <property name="text" translatable="yes">Limpiar</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Button" id="button13">
+            <property name="command" type="command" cbtype="simple">send_data</property>
+            <property name="text" translatable="yes">Enviar</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="tk.Toplevel" id="delete_last_view">
+    <property name="height">200</property>
+    <property name="width">200</property>
+    <child>
+      <object class="tk.Label" id="label41">
+        <property name="font">{Calibri} 16 {}</property>
+        <property name="text" translatable="yes">Eliminar última fila en Iris Dataset</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">10</property>
+          <property name="pady">10</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Button" id="button14">
+        <property name="command" type="command" cbtype="simple">send_data</property>
+        <property name="default">normal</property>
+        <property name="text" translatable="yes">Eliminar</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="pady">10</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object class="tk.Toplevel" id="delete_id_view">
+    <property name="height">200</property>
+    <property name="width">200</property>
+    <child>
+      <object class="tk.Label" id="label42">
+        <property name="font">{Calibri} 16 {}</property>
+        <property name="text" translatable="yes">Eliminar en Iris Dataset</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">10</property>
+          <property name="pady">10</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame24">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">1</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">20</property>
+          <property type="row" id="all" name="pad">15</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Label" id="label43">
+            <property name="text" translatable="yes">ID:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry30">
+            <property name="text" translatable="yes">0</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="frame25">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">2</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property type="col" id="all" name="pad">30</property>
+          <property type="row" id="all" name="pad">15</property>
+        </containerlayout>
+        <child>
+          <object class="tk.Button" id="button15">
+            <property name="command" type="command" cbtype="simple">clear_data</property>
+            <property name="text" translatable="yes">Limpiar</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Button" id="button16">
+            <property name="command" type="command" cbtype="simple">send_data</property>
+            <property name="text" translatable="yes">Enviar</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
