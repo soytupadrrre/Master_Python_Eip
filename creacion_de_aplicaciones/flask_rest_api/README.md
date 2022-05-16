@@ -1,4 +1,4 @@
-# Flask API REST
+# Flask API REST 
 Script creado para la asignatura de Creación de aplicaciones Python de la Escuela Internacional de Postgrados, lección 8.
 
 ## Autor
