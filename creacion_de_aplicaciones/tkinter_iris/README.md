@@ -45,6 +45,7 @@ Página con una tabla con el resumen de los datos de la base de datos.
 Página que muestra la precisión de los modelos Machine Learning.
 La precisión se calcula con los datos dentro de Iris Dataset, con un 80% de los datos empleados como entrenamiento y un 20% como prueba (train y test).
 Los resultados varían en función de la predicción de los modelos.
+
 ![iris](img/acc_1.png)
 ![iris](img/acc_2.png)
 
@@ -58,6 +59,7 @@ Página con un formulario para insertar datos en la base de datos.
 
 ### Predecir e Insertar datos
 Página con un formulario para insertar datos en la base de datos y una tabla con los resultados de la predicción.
+
 ![iris](img/predict_data.png)
 
 ### Actualizar último dato
@@ -70,10 +72,12 @@ Página con un formulario para actualizar un dato de la base de datos por su ID.
 
 ### Eliminar último dato
 Página con un formulario para eliminar el último dato de la base de datos.
+
 ![iris](img/delete_last.png)
 
 ### Eliminar dato por IDs
 Página con un formulario para eliminar un dato de la base de datos por su ID.
+
 ![iris](img/delete_by_id.png)
 
 ## Notas:
