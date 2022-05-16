@@ -1,4 +1,4 @@
-# IRIS TKINTER GUI
+# IRIS PYQT5 GUI
 Script creado para la asignatura de Creación de aplicaciones Python de la Escuela Internacional de Postgrados, lección 11.
 
 ## Autor
