@@ -3,10 +3,10 @@
 Repositorio para almacenar las actividades relaciondas con la edición VI del Máster Avanzado de Programación en Python para Hacking, BigData y Machine Learning de la Escuela Internacional de Postgrados
 
 ## Asignaturas:
-- [x] Fundamentos Python
-- [x] Programación Avanzada en Python
+- Fundamentos Python
+- Programación Avanzada en Python
 - [ ] Buenas Prácticas de programación en Python
-- [ ] Creación de aplicaciones
+- Creación de aplicaciones
 - [ ] Desarrollo seguro
 - [ ] Fundamentos BigData
 - [ ] Programación Python para BigData
