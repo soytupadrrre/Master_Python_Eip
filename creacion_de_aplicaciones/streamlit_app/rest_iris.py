@@ -205,7 +205,6 @@ class RestIris:
         # Metodo pd.append() funciona igual pero quedará obsoleto 
         # en proximas versiones de pandas
 
-        del data["classifier"]
         self.iris_df = pd.concat([self.iris_df, pd.DataFrame(data, index=[new_id])])
         self.update_csv()
         data["id"] = new_id
