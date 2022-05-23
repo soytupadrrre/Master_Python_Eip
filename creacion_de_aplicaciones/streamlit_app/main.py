@@ -35,4 +35,3 @@ elif add_radio == "Actualizar datos":
 
 elif add_radio == "Eliminar datos":
     views.eliminar.view(iris)
-
