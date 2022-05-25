@@ -1,17 +1,15 @@
-from pywebio.input import *
-from pywebio.output import *
+from pywebio import start_server, config
+import app
+    
+if __name__ == "__main__":
+    config(theme="dark")
+    app_list = [
+        app.app_datos,
+        app.app_matrix,
+        app.app_prediccion,
+        app.app_insertar,
+        app.app_actualizar,
+        app.app_eliminar,
+    ]
+    start_server(app_list, port=8080, debug=True)
 
-# Hello world
-# TODO: Ver datos de Iris Dataset
-
-# TODO: Mostrar matríz de confusión
-
-# TODO: Predecir datos
-
-# TODO: Insertar datos
-
-# TODO: Actualizar datos
-
-# TODO: Eliminar datos
-
-put_text("Hello world!")
