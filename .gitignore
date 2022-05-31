@@ -136,3 +136,6 @@ dmypy.json
 !*requirements.txt
 *.csv
 *.ini
+
+# SonnarQube
+.scannerwork
