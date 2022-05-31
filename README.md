@@ -5,15 +5,15 @@ Repositorio para almacenar las actividades relaciondas con la edición VI del M�
 ## Asignaturas:
 - Fundamentos Python
 - Programación Avanzada en Python
-- [ ] Buenas Prácticas de programación en Python
+- Buenas Prácticas de programación en Python
 - Creación de aplicaciones
-- [ ] Desarrollo seguro
-- [ ] Fundamentos BigData
-- [ ] Programación Python para BigData
-- [ ] Fundamentos IA y Machine Learning
-- [ ] Programación Python para Machine Learning
-- [ ] Hacking y Pentesting con Python (Se incluyen los scripts del Master de Ciberseguridad)
-- [ ] Certificación PCAP
+- Desarrollo seguro
+- Fundamentos BigData
+- Programación Python para BigData
+- Fundamentos IA y Machine Learning
+- Programación Python para Machine Learning
+- Hacking y Pentesting con Python (Se incluyen los scripts del Master de Ciberseguridad)
+- Certificación PCAP
 
 ## Extra:
 Recolección de scripts del Máster de Ciberseguridad en los siguientes lenguajes
