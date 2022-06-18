@@ -13,7 +13,7 @@ En caso de utilizar la interfaz web de Streamlit, se debe instalar la librería 
 y ejecutar el programa con el comando `streamlit run app_finanzas.py`
 
 @autor: Víctor Luque Martín
-@fecha: 15-06-2022
+@fecha: 18-06-2022
 @versión: 1.0
 @licencia: MIT
 @email: victorluque341@gmail.com
