@@ -42,7 +42,14 @@ class TestApp(unittest.TestCase):
         """
         df = app.read_file(self.test_file)
         parsed = app.get_df_year(app.parse_dataframe(df))
+        colnames = ["Ahorros", "Gastos"]
+        indexnames = ['Enero', 'Febrero', 'Marzo', 
+                'Abril', 'Mayo', 'Junio', 
+                'Julio', 'Agosto', 'Septiembre', 
+                'Octubre', 'Noviembre', 'Diciembre']
         self.assertEqual(parsed.shape, (12, 2))
+        self.assertEqual(parsed.columns.tolist(), colnames)
+        self.assertEqual(parsed.index.tolist(), indexnames)
 
     def test_most_spent_month(self):
         """
