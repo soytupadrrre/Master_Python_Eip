@@ -45,14 +45,9 @@ def read_file(filepath: Path) -> str:
     :param filepath: ruta del archivo csv
     :type filepath: Path
     :raises FileNotFoundError: Si el archivo no existe
-    :raises ValueError: Si el archivo no tiene 12 columnas
-    :raises ValueError: Si los nombres de las columnas no son correctos
-    :raises ValueError: Si existen valores nulos
-    :raises ValueError: Si existen valores no numéricos
     :return: dataframe con los datos del archivo
     :rtype: pd.DataFrame
     """
-    df = None
     try :
         # Lectura de fichero
 
@@ -60,18 +55,43 @@ def read_file(filepath: Path) -> str:
         if not filepath.exists():
             raise FileNotFoundError('No se encuentra el archivo {}'.format(filepath))
 
-        df = pd.read_csv(filepath, sep='\t')
+        return pd.read_csv(filepath, sep='\t')
 
-        # Comprobación de que el fichero tiene 12 columnas
-        assert len(df.columns) == 12, 'El fichero no tiene 12 columnas'
+    except FileNotFoundError as e:
+        raise e
+        
+def check_columns(df: pd.DataFrame) -> bool:
+    """
+    Función que comprueba que las columnas sean correctas
 
-        # Comprobación de que los nombres de las columnas son correctos
-        colnames = ['Enero', 'Febrero', 'Marzo', 
-                    'Abril', 'Mayo', 'Junio', 
-                    'Julio', 'Agosto', 'Septiembre', 
-                    'Octubre', 'Noviembre', 'Diciembre']
-        assert df.columns.tolist() == colnames, 'Los nombres de las columnas no son correctos'
+    :param df: dataframe con los datos del archivo
+    :type df: pd.DataFrame
+    :raises AssertionError: Si no se cumplen las condiciones
+    :return: True si las columnas son correctas
+    :rtype: bool
+    """
+    # Comprobación de que el fichero tiene 12 columnas
+    assert len(df.columns) == 12, 'El fichero no tiene 12 columnas'
+    # Comprobación de que los nombres de las columnas son correctos
+    colnames = ['Enero', 'Febrero', 'Marzo', 
+                'Abril', 'Mayo', 'Junio', 
+                'Julio', 'Agosto', 'Septiembre', 
+                'Octubre', 'Noviembre', 'Diciembre']
+    assert df.columns.tolist() == colnames, 'Los nombres de las columnas no son correctos'
+    return True
 
+def parse_dataframe(df: pd.DataFrame):
+    """
+    Función que estandariza los datos del dataframe
+
+    :param df: dataframe con los datos del archivo
+    :type df: pd.DataFrame
+    :raises ValueError: Si existen valores nulos
+    :raises ValueError: Si existen valores no numéricos
+    :return: dataframe con los datos estandarizados
+    :rtype: pd.DataFrame
+    """
+    try: 
         for col in df.columns:
             # Comprobación de que no existen valores nulos
             if df[col].isnull().any():
@@ -81,16 +101,8 @@ def read_file(filepath: Path) -> str:
             if df[col].dtype != 'float64' or df[col].dtype != 'int64':
                 raise ValueError('Hay valores no numéricos en la columna {} serán reemplazados por 0'.format(col))
 
-    except FileNotFoundError as e:
-        print(e)
-        exit()
-
     except ValueError as e:
         print(e)
-
-    except AssertionError as e:
-        print(e)
-        exit()
 
     finally:
         if df is not None:
@@ -100,8 +112,6 @@ def read_file(filepath: Path) -> str:
             # Sustitución de valores no validos por 0
             df.fillna(0, inplace=True)
             return df
-        else:
-            exit()
 
 def most_spent_month(df: pd.DataFrame) -> list:
     """
@@ -119,7 +129,7 @@ def most_spent_month(df: pd.DataFrame) -> list:
     max_value = gastos[max_index]
     return max_index, max_value
 
-def most_saved_month(df: pd.DataFrame) -> list:
+def most_saving_month(df: pd.DataFrame) -> list:
     """
     Función que devuelve el mes con menor gasto y el importe total de ese mes
 
@@ -223,13 +233,16 @@ def main():
     #filepath = Path(__file__).absolute().parent / 'finanzas2020.csv'
     # Lectura del archivo
     df = read_file(filepath)
-    df_year = get_df_year(df)
+    if df is None:
+        return
+    check_columns(df)
+    df_year = get_df_year(parse_dataframe(df))
     # Imprimir el mes con mayor gasto y el importe total de ese mes
     month, spent = most_spent_month(df_year)
     print("===== MES CON MAYOR GASTO =====")
     print(f"El mes con mayor gasto es {month} y el importe total de gastos es {spent:.2f}\n")
     # Imprimir el mes con menor gasto y el importe total de ese mes
-    month, saved = most_saved_month(df_year)
+    month, saved = most_saving_month(df_year)
     print("===== MES CON MAYOR INGRESOS =====")
     print(f"El mes con menor gasto es {month} y el importe total de ingresos es {saved:.2f}\n")
     # Imprimir el importe medio de gastos de todo el año
@@ -264,16 +277,17 @@ def main_st():
     st.write("## Control de errores, pruebas y validación de datos")
     # Carga del archivo
     # filepath comes from input
-    filepath = st.file_uploader("Ingrese el archivo", type=['csv'])
-    if filepath is not None:
+    file = st.file_uploader("Ingrese el archivo", type=['csv'])
+    if file is not None:
     #filepath = Path(__file__).absolute().parent / 'finanzas2020.csv'
     # Lectura del archivo
-        df = read_file(filepath)
-        df_year = get_df_year(df)
+        df = pd.read_csv(file, sep='\t')
+        check_columns(df)
+        df_year = get_df_year(parse_dataframe(df))
         # Imprimir el mes con mayor gasto y el importe total de ese mes
         month, spent = most_spent_month(df_year)
         st.write(f"El mes con mayor gasto es `{month}` y el importe total de gastos es `{spent:.2f} €`\n")
-        month, saved = most_saved_month(df_year)
+        month, saved = most_saving_month(df_year)
         st.write(f"El mes con menor gasto es `{month}` y el importe total de ingresos es `{saved:.2f} €`\n")
         avg = avg_spent(df_year)
         st.write(f"El importe medio de gastos de todo el año es `{avg:.2f} €`\n")
