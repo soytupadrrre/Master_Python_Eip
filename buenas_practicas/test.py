@@ -9,22 +9,32 @@ class TestApp(unittest.TestCase):
 
     def test_read_file_return_dataframe(self):
         """
-        Comprueba que la función read_file devuelva un dataframe
+        # Test 1: La lectura del fichero devuelve un Dataframe
+        Este test comprueba que al invocar a la función read_file 
+        si el fichero es correcto nos devuelve una instancia de 
+        un Dataframe de la librería pandas.
         """
         self.assertIsInstance(app.read_file(self.test_file), pd.DataFrame)
 
     def test_file_not_found(self):
         """
-        Comprueba que la función read_file lanza una excepción si el archivo no existe
+        Test 2: El fichero no existe
+        Este test comprueba que en caso de que el fichero no exista, 
+        salte una excepción de tipo FileNotFoundError. 
         """
         with self.assertRaises(FileNotFoundError):
             app.read_file(Path("buenas_practicas/finanzas2021.csv"))
 
     def test_check_columns_in_dataframe(self):
         """
-        Comprueba que la función check_columns no lanza ningun error de tipo 
-        AssertionError y devuelve True en caso de que el dataframe tenga 
-        las columnas correctas
+        Test 3:  Comprobar columnas
+        Este test controla que el número de columnas sea 12 y 
+        los nombres de las columnas sean los especificados en 
+        la función check_columns. 
+
+        En caso de que no sean validos los datos, debe de saltar 
+        un error de tipo AssertionError en caso de que todo sea 
+        correcto, check_columns debe devolver “True”
         """
         df = app.read_file(self.test_file)
         # Drop last colum
@@ -38,7 +48,11 @@ class TestApp(unittest.TestCase):
 
     def test_parsed_dataframe(self):
         """
-        Comprueba que la función parse_dataframe devuelva un dataframe con 12 filas y 2 columnas
+        Test 4: Dataframe Formateado
+        Este test controla que para realizar las operaciones 
+        sea necesario tener un dataframe de 12 filas y 2 columnas. 
+        Las filas son los nombres de los meses y las columnas son 
+        una para gastos y otra para ahorros.
         """
         df = app.read_file(self.test_file)
         parsed = app.get_df_year(app.parse_dataframe(df))
@@ -53,7 +67,10 @@ class TestApp(unittest.TestCase):
 
     def test_most_spent_month(self):
         """
-        Comprueba que la función most_spent_month devuelve el mes con mayor gasto
+        Test 5: Mes con mayor gasto
+        Este test controla que, de acuerdo a los datos de 
+        la actividad anterior, el mes con mayor gasto sea 
+        abril con un gasto total de 34.133,0 €
         """
         df = app.parse_dataframe(app.read_file(self.test_file))
         parsed = app.get_df_year(df)
@@ -63,7 +80,9 @@ class TestApp(unittest.TestCase):
 
     def test_most_saving_month(self):
         """
-        Comprueba que la función most_saving_month devuelve el mes con mayor ahorro
+        Test 6: Mes con mayor ahorro
+        Este test controla que el mes con mayor ahorro 
+        sea enero con un total de ahorro de 29.685,0 €
         """
         df = app.parse_dataframe(app.read_file(self.test_file))
         parsed = app.get_df_year(df)
@@ -73,7 +92,9 @@ class TestApp(unittest.TestCase):
 
     def test_avg_spent_year(self):
         """
-        Comprueba que la función avg_spent_year devuelve el promedio de gastos del año
+        Test 7: Media de gastos al año
+        Este test controla que la media de gastos anuales
+        sea de 24.732,58 €
         """
         df = app.parse_dataframe(app.read_file(self.test_file))
         parsed = app.get_df_year(df)
