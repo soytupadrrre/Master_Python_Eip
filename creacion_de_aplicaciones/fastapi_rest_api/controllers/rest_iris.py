@@ -3,22 +3,24 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
-
+from pathlib import Path
+from typing import Optional
 class IrisML:
     """
     Clase para el manejo Machine Learning de Iris DataSet
+
+    :param df_train: DataFrame con los datos de entrenamiento
+    :type df_train: pd.DataFrame
+    :param df_test: DataFrame con los datos de prueba
+    :type df_test: Optional[pd.DataFrame]
+    :param classifier: Clasificador a utilizar
+    :type classifier: Optional[str]
     """
-    def __init__(self, df_train:pd.DataFrame, df_test:pd.DataFrame=None, classifier:str='DecissionTree') -> None:
+    def __init__(self, df_train:pd.DataFrame, 
+                 df_test:Optional[pd.DataFrame]=None, 
+                 classifier:Optional[str]='DecissionTree') -> None:
         """
         Constructor de la clase
-
-        :param df_train: DataFrame con los datos de entrenamiento
-        :type df_train: pd.DataFrame
-        :param df_test: DataFrame con los datos de prueba
-        :type df_test: pd.DataFrame
-        :param classifier: Clasificador a utilizar
-        :type classifier: str
-        :return: None
         """
         self.df_train = df_train
         self.df_test = df_test
@@ -130,17 +132,16 @@ class IrisML:
 class RestIris:
     """
     Clase para el manejo de la API de Iris DataSet
+
+    :param iris_path: Path del dataset
+    :type iris_path: Optional[str]
     """
-    def __init__(self, iris_path:str = "data/iris.csv") -> None:
+    def __init__(self, iris_path: Optional[str] = "data/iris.csv") -> None:
         """
         Constructor de la clase
-
-        :param iris_path: Path del dataset
-        :type iris_path: str
-        :return: None
         """
-        self.iris_path = iris_path
-        self.iris_df = pd.read_csv(self.iris_path, engine='python') 
+        self.iris_path = Path(__file__).absolute().parent.parent / iris_path
+        self.iris_df = pd.read_csv(self.iris_path) 
 
     def update_csv(self) -> None:
         """

@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
-from routers.iris_router import iris_router
+from .routers.iris_router import iris_router
 
 app = FastAPI()
 
