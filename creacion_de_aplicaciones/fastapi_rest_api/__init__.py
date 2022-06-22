@@ -14,8 +14,7 @@ Script creado para la asignatura de Creación de aplicaciones Python de la Escue
 
 ## Lanzamiento de la aplicación FastAPI: 
 ```powershell
-cd fastapi_rest_api
-uvicorn main:app --reload
+uvicorn fastapi_rest_api:app --reload
 ```
 
 ## Rutas de la aplicación:
