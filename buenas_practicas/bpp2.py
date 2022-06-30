@@ -1,8 +1,8 @@
 import unittest
-import app
+import bpp1
 from pathlib import Path
 import pandas as pd
-# Create unittest for app.py
+# Create unittest for bpp1.py
 class TestApp(unittest.TestCase):
     def setUp(self) -> None:
         self.test_file = Path("buenas_practicas/finanzas2020.csv")
@@ -14,7 +14,7 @@ class TestApp(unittest.TestCase):
         si el fichero es correcto nos devuelve una instancia de 
         un Dataframe de la librería pandas.
         """
-        self.assertIsInstance(app.read_file(self.test_file), pd.DataFrame)
+        self.assertIsInstance(bpp1.read_file(self.test_file), pd.DataFrame)
 
     def test_file_not_found(self):
         """
@@ -23,7 +23,7 @@ class TestApp(unittest.TestCase):
         salte una excepción de tipo FileNotFoundError. 
         """
         with self.assertRaises(FileNotFoundError):
-            app.read_file(Path("buenas_practicas/finanzas2021.csv"))
+            bpp1.read_file(Path("buenas_practicas/finanzas2021.csv"))
 
     def test_check_columns_in_dataframe(self):
         """
@@ -36,15 +36,15 @@ class TestApp(unittest.TestCase):
         un error de tipo AssertionError en caso de que todo sea 
         correcto, check_columns debe devolver “True”
         """
-        df = app.read_file(self.test_file)
+        df = bpp1.read_file(self.test_file)
         # Drop last colum
         df_test_col_num = df.drop(df.columns[-1], axis=1)
-        self.assertRaises(AssertionError, app.check_columns, df_test_col_num)
+        self.assertRaises(AssertionError, bpp1.check_columns, df_test_col_num)
         # Lowercase all colums
         df_test_col_names = df.copy()
         df_test_col_names.columns = df_test_col_names.columns.str.lower()
-        self.assertRaises(AssertionError, app.check_columns, df_test_col_names)
-        self.assertEqual(app.check_columns(df), True)
+        self.assertRaises(AssertionError, bpp1.check_columns, df_test_col_names)
+        self.assertEqual(bpp1.check_columns(df), True)
 
     def test_parsed_dataframe(self):
         """
@@ -54,8 +54,8 @@ class TestApp(unittest.TestCase):
         Las filas son los nombres de los meses y las columnas son 
         una para gastos y otra para ahorros.
         """
-        df = app.read_file(self.test_file)
-        parsed = app.get_df_year(app.parse_dataframe(df))
+        df = bpp1.read_file(self.test_file)
+        parsed = bpp1.get_df_year(bpp1.parse_dataframe(df))
         colnames = ["Ahorros", "Gastos"]
         indexnames = ['Enero', 'Febrero', 'Marzo', 
                 'Abril', 'Mayo', 'Junio', 
@@ -72,9 +72,9 @@ class TestApp(unittest.TestCase):
         la actividad anterior, el mes con mayor gasto sea 
         abril con un gasto total de 34.133,0 €
         """
-        df = app.parse_dataframe(app.read_file(self.test_file))
-        parsed = app.get_df_year(df)
-        month, value = app.most_spent_month(parsed)
+        df = bpp1.parse_dataframe(bpp1.read_file(self.test_file))
+        parsed = bpp1.get_df_year(df)
+        month, value = bpp1.most_spent_month(parsed)
         self.assertEqual(month, 'Abril')
         self.assertEqual(value, 34133.0)
 
@@ -84,9 +84,9 @@ class TestApp(unittest.TestCase):
         Este test controla que el mes con mayor ahorro 
         sea enero con un total de ahorro de 29.685,0 €
         """
-        df = app.parse_dataframe(app.read_file(self.test_file))
-        parsed = app.get_df_year(df)
-        month, value = app.most_saving_month(parsed)
+        df = bpp1.parse_dataframe(bpp1.read_file(self.test_file))
+        parsed = bpp1.get_df_year(df)
+        month, value = bpp1.most_saving_month(parsed)
         self.assertEqual(month, 'Enero')
         self.assertEqual(value, 29685.0)
 
@@ -96,8 +96,8 @@ class TestApp(unittest.TestCase):
         Este test controla que la media de gastos anuales
         sea de 24.732,58 €
         """
-        df = app.parse_dataframe(app.read_file(self.test_file))
-        parsed = app.get_df_year(df)
-        avg = app.avg_spent(parsed)
+        df = bpp1.parse_dataframe(bpp1.read_file(self.test_file))
+        parsed = bpp1.get_df_year(df)
+        avg = bpp1.avg_spent(parsed)
         self.assertEqual(round(avg, 2), 24732.58)
         
