@@ -1,4 +1,3 @@
-# Create a CRUD application using Python and PostgreSQL
 from dataclasses import dataclass
 from typing import List, Union
 import psycopg2
