@@ -27,6 +27,14 @@ services:
     networks:
       - postgres
 
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - postgres
+
   mongo:
     container_name: mongo
     image: mongo
