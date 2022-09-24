@@ -142,3 +142,12 @@ dmypy.json
 
 # vscode
 .vscode/
+
+# Dask
+dask-worker-space/
+
+# Parquet
+*.parquet
+
+# HDF5
+*.hdf5
