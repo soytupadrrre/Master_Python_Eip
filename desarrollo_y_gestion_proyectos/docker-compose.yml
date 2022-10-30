@@ -1,0 +1,10 @@
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=ash_ketchum
+      - MONGO_INITDB_ROOT_PASSWORD=Pu3bl0_Pal3ta
+      - MONGO_INITDB_DATABASE=pokedex
+    
