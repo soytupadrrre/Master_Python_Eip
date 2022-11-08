@@ -136,6 +136,9 @@ dmypy.json
 !*requirements.txt
 *.csv
 *.ini
+*.parquet
+*.hdf5 
+*.data
 
 # SonnarQube
 .scannerwork
@@ -145,9 +148,3 @@ dmypy.json
 
 # Dask
 dask-worker-space/
-
-# Parquet
-*.parquet
-
-# HDF5
-*.hdf5 
