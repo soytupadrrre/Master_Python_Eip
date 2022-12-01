@@ -139,6 +139,7 @@ dmypy.json
 *.parquet
 *.hdf5 
 *.data
+*.dat
 
 # SonnarQube
 .scannerwork
