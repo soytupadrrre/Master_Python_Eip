@@ -140,6 +140,8 @@ dmypy.json
 *.hdf5 
 *.data
 *.dat
+*.tra
+*.tes
 
 # SonnarQube
 .scannerwork
