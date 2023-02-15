@@ -80,7 +80,7 @@ def get_nmap_scan_results(hosts: List[str]) -> pd.DataFrame:
     :rtype: pd.DataFrame
     """
     scanner = nmap.PortScanner()
-    scan_results = pd.DataFrame(columns=["Host", "Port", "Status", "Service", "Version"])
+    scan_results = pd.DataFrame(columns=["Host", "Port", "Status", "Protocol", "Version"])
     for host in hosts:
         # nmap host -A -p 80,443
         scanner.scan(hosts=host, ports='80,443', arguments="-A")
