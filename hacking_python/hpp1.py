@@ -50,8 +50,8 @@ def get_apache_vuln_hosts_from_shodan(api: shodan.Shodan, limit: int = 5) -> Lis
                 if len(hosts) >= limit:
                     break
                 if "vulns" in result and \
-                    cve in result["vulns"] and \
-                    validate_ipv4(result["ip_str"]):
+                        cve in result["vulns"] and \
+                        validate_ipv4(result["ip_str"]):
                     hosts.add(result["ip_str"])
 
         except shodan.APIError as e:
@@ -80,7 +80,8 @@ def get_nmap_scan_results(hosts: List[str]) -> pd.DataFrame:
     :rtype: pd.DataFrame
     """
     scanner = nmap.PortScanner()
-    scan_results = pd.DataFrame(columns=["Host", "Port", "Status", "Protocol", "Version"])
+    scan_results = pd.DataFrame(
+        columns=["Host", "Port", "Status", "Protocol", "Version"])
     for host in hosts:
         # nmap host -A -p 80,443
         scanner.scan(hosts=host, ports='80,443', arguments="-A")
