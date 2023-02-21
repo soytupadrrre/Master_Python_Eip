@@ -262,14 +262,17 @@ class Metasploitable2(VictimHost):
     def __init__(self, victim_ip: str) -> None:
         """Constructor de la clase Metasploitable2"""
         super().__init__(victim_ip)
-        self._exploit_choices = {
-            "java_rmi_server": self._exploit_java_rmi_server,
-            "distccd": self._exploit_distccd,
-            "unreal_ircd_3281_backdoor": self._exploit_unreal_ircd_3281_backdoor,
-            "usermap": self._exploit_usermap,
-            "apache_twiki": self._exploit_apache_twiki,
-            "vsftpd_234_backdoor": self._exploit_vsftpd_234_backdoor
-        }
+        #self._exploit_choices = {
+        #    "java_rmi_server": self._exploit_java_rmi_server,
+        #    "distccd": self._exploit_distccd,
+        #    "unreal_ircd_3281_backdoor": self._exploit_unreal_ircd_3281_backdoor,
+        #    "usermap": self._exploit_usermap,
+        #    "apache_twiki": self._exploit_apache_twiki,
+        #    "vsftpd_234_backdoor": self._exploit_vsftpd_234_backdoor
+        #}
+        # create the _exploit_choices dynamically, based on the methods name
+        self._exploit_choices = {k: getattr(self, k) for k in dir(self) if k.startswith("_exploit_")}
+
 
     def _exploit_java_rmi_server(self, metasploit: PyMetasploit) -> None:
         """
