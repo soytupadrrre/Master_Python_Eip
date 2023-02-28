@@ -211,12 +211,14 @@ class VictimHost:
     :param victim_ip: IP de la máquina objetivo
     :type victim_ip: str
     """
-    _exploit_choices = {}
 
     def __init__(self, victim_ip: str):
         """Constructor de la clase VictimHost"""
         self.victim_ip = victim_ip
         self._check_host_reachable()
+        choices = {k.replace("_exploit_", ""): getattr(self, k) for k in dir(self) if k.startswith("_exploit_")}
+        choices["exit"] = exit
+        self._exploit_choices = choices
 
     @property
     def available_exploits(self) -> Dict[str, str]:
@@ -258,21 +260,6 @@ class Metasploitable2(VictimHost):
     :param victim_ip: IP de la máquina Metasploitable2
     :type victim_ip: str
     """
-
-    def __init__(self, victim_ip: str) -> None:
-        """Constructor de la clase Metasploitable2"""
-        super().__init__(victim_ip)
-        #self._exploit_choices = {
-        #    "java_rmi_server": self._exploit_java_rmi_server,
-        #    "distccd": self._exploit_distccd,
-        #    "unreal_ircd_3281_backdoor": self._exploit_unreal_ircd_3281_backdoor,
-        #    "usermap": self._exploit_usermap,
-        #    "apache_twiki": self._exploit_apache_twiki,
-        #    "vsftpd_234_backdoor": self._exploit_vsftpd_234_backdoor
-        #}
-        # create the _exploit_choices dynamically, based on the methods name
-        self._exploit_choices = {k: getattr(self, k) for k in dir(self) if k.startswith("_exploit_")}
-
 
     def _exploit_java_rmi_server(self, metasploit: PyMetasploit) -> None:
         """
@@ -400,14 +387,14 @@ def exploit_menu(victim: VictimHost) -> Optional[Callable[[PyMetasploit], None]]
     :return: Nombre del exploit seleccionado
     :rtype: str
     """
-    text = "ID\t| Payload\n"
+    text = "ID\t| Exploits\n"
     text += "-"*8 + "+" + "-"*27 + "\n"
     for k, v in victim.available_exploits.items():
         text += f"{k}\t| {v}\n"
     text += "Selected: "
     while True:
         selected = input(f"Select the exploit to use or exit:\n{text}")
-        if selected.lower() == "exit":
+        if selected.lower() == "exit" or selected.lower() == str(len(victim.available_exploits.keys())-1):
             break
         for k, v in victim.available_exploits.items():
             if selected.lower() == k or selected.lower() == v:
@@ -420,7 +407,7 @@ if __name__ == "__main__":
     local_ip = suggest_local_ip()
     metasploit = PyMetasploit(msfclient, default_input(
         f"Your attacker IP (default: {local_ip}): ", f"{local_ip}"))
-    victim_ip = default_input("Metasploitable2 IP Address: ", "192.168.28.145")
+    victim_ip = input("Metasploitable2 IP Address: ")
     metasploitable2 = Metasploitable2(victim_ip)
 
     while True:
