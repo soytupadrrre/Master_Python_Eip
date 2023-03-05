@@ -2,7 +2,6 @@ import argparse
 import hashlib
 import crypt
 from hmac import compare_digest as compare_hash
-import time
 
 def crack_ntlm(crypted_pass, wordlist):
     func = lambda x: compare_hash(crypted_pass, hashlib.new('md4', x.encode('utf-16le')).hexdigest()) 
@@ -44,7 +43,7 @@ def load_file(file_path):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Crack NTLM and Unix hashes')
-    parser.add_argument('type', help='Hash type (ntlm or unix)')
+    parser.add_argument('type', help='Hash type (ntlm or unix)', choices=['ntlm', 'unix'])
     parser.add_argument('file', help='Hash file')
     parser.add_argument('wordlist', help='Wordlist file')
     args = parser.parse_args()
