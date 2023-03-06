@@ -23,7 +23,7 @@ def to_file(host, msg, output, buffer_length, id_zfill=3):
 
 def handle_client(conexion, direccion, output, id_zfill=3, buffer_length=1000):
     host, _ = direccion
-    buffer = 0
+    buffer_ = 0
     while True:
         datos = conexion.recv(1024)
         if not datos:
@@ -31,10 +31,10 @@ def handle_client(conexion, direccion, output, id_zfill=3, buffer_length=1000):
 
         msg = datos.decode('utf-8')
         to_file(host, msg, output, buffer_length, id_zfill)
-        if buffer < buffer_length:
-            buffer += 1
+        if buffer_ < buffer_length:
+            buffer_ += 1
         else:
-            buffer = 0
+            buffer_ = 0
         print('Se ha recibido el siguiente mensaje:', msg)
 
     # Cerrar la conexión entrante
