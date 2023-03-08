@@ -1,19 +1,3 @@
-"""
-Aplicación para la búsqueda de hosts vulnerables a CVE-2021-41773 en Shodan y escaneo de puertos 80 y 443 con Nmap
-
-Script creado para la asignatura de Hacking y Pentesting con Python de la Escuela Internacional de Postgrados.
-
-Es necesario tener instaladas las librerías de Shodan, Nmap y Pandas para el correcto funcionamiento del script.
-
-```cmd
-pip install shodan python-nmap pandas
-```
-
-**@autor:** Víctor Luque Martín </br>
-**@fecha:** 02-02-2023 </br>
-**@versión:** 1.0 </br>
-**@email:** victorluque341@gmail.com </br>
-"""
 import shodan  # pip install shodan
 import nmap  # pip install python-nmap
 import pandas as pd  # pip install pandas
