@@ -5,15 +5,18 @@ from colorama import Fore
 from pathlib import Path
 import asyncio
 
+
 class SSHHost:
     """
     Clase que representa una conexión SSH a un host
     """
-    
-    def __init__(self, host, user, passwd):
+
+    def __init__(self, host, user=None, passwd=None, key=None, key_pass=None):
         self.ip = host
         self.user = user
         self.passwd = passwd
+        self.key = key
+        self.key_pass = key_pass
         self.__set_ssh_client()
 
         self.stdout = None
@@ -22,9 +25,13 @@ class SSHHost:
     def __set_ssh_client(self):
         self.client = SSHClient()
         self.client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        self.client.connect(self.ip, username=self.user,
-                            password=self.passwd)
-        
+        self.client.connect(self.ip,
+                            username=self.user,
+                            password=self.passwd,
+                            key_filename=self.key,
+                            passphrase=self.key_pass,
+                            timeout=10)
+
     def exec_command(self, command, local=None, remote=None):
         """
         Ejecuta un comando en el host remoto
@@ -68,11 +75,6 @@ class SSHHost:
         """
         self.client.close()
 
-# Change the hosts to your own
-hosts = [
-    SSHHost(host="192.168.1.44", user="pi", passwd="raspberry"),
-    SSHHost(host="192.168.28.141", user="victor", passwd="victor")
-]
 
 async def execute_commands(host, command, local, remote):
     """
@@ -95,26 +97,43 @@ async def execute_commands(host, command, local, remote):
     else:
         response = f"{Fore.LIGHTGREEN_EX}{host.user}@{host.ip}{Fore.RESET}: {Fore.BLUE}${Fore.RESET} {command}\n{host.stdout}\n"
     response += "-"*80
-    #print(host.stdout)
+    # print(host.stdout)
     host.close()
     return response
+
 
 async def main():
     """
     Función principal que ejecuta los comandos en los hosts remotos de forma asíncrona
     """
-    tasks = [execute_commands(host, args.command, args.local, args.remote) for host in hosts]
+    hosts = await asyncio.gather(*[
+        create_connection(host="192.168.1.44", user="pi",
+                          password="raspberry"),
+        create_connection(host="192.168.28.141",
+                          user="victor", password="victor"),
+        create_connection(host="",
+                          user="", key=r"private.key")
+    ])
+    hosts = list(filter(lambda x: x, hosts))
+    tasks = [execute_commands(
+        host, args.command, args.local, args.remote) for host in hosts]
     results = await asyncio.gather(*tasks)
     for result in results:
         print(result)
 
+
+async def create_connection(host, user, password=None, key=None, key_pass=None):
+    try:
+        return SSHHost(host=host, user=user, passwd=password, key=key, key_pass=key_pass)
+    except Exception as e:
+        print(f"Error connecting to {host}: {e}")
+
 if __name__ == "__main__":
     parser = ArgumentParser(description="SSH Hosts")
-    parser.add_argument("-c", "--command", required=True, help="Command to execute")
+    parser.add_argument("-c", "--command", required=True,
+                        help="Command to execute")
     parser.add_argument("-l", "--local", help="Local file to upload")
     parser.add_argument("-r", "--remote", help="Remote file to upload")
     args = parser.parse_args()
 
     asyncio.run(main())
-
-    

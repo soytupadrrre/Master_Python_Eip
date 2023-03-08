@@ -153,3 +153,7 @@ dmypy.json
 
 # Dask
 dask-worker-space/
+
+# RSA
+*.pem
+*.key
