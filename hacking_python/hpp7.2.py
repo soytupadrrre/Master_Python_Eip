@@ -1,6 +1,7 @@
 from pathlib import Path
 from argparse import ArgumentParser
 import re
+from colorama import Fore, Style
 
 patrones = {
     "password" :r'password',
@@ -30,13 +31,17 @@ def detectar_patrones(fichero: Path):
                 
                 grupo = re.search(patron, linea, re.IGNORECASE).group()
                 idx = linea.index(grupo)
+                linea_idx = lineas.index(linea)
                 start = idx - 10
                 end = idx + len(grupo) + 10
                 if start < 0:
                     start = 0
                 if end > len(linea):
                     end = len(linea)
-                detecciones.append((fichero.name, key, grupo, lineas.index(linea), idx, linea[start:end].strip()))
+                fragment = linea[start:end].strip()
+                # Color the pattern in the fragment
+                fragment = fragment.replace(grupo, Fore.LIGHTGREEN_EX + grupo + Style.RESET_ALL)
+                detecciones.append((fichero.name, key, grupo, linea_idx, idx, fragment.strip()))
     return detecciones
 
 
