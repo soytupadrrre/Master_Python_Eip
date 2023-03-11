@@ -102,17 +102,26 @@ async def execute_commands(host, command, local, remote):
     return response
 
 
+async def create_sshhost(host, user, password=None, key=None, key_pass=None):
+    """
+    Crea una conexión SSH a un host remoto
+    """
+    try:
+        return SSHHost(host=host, user=user, passwd=password, key=key, key_pass=key_pass)
+    except Exception as e:
+        print(f"Error connecting to {host}: {e}")
+
+
 async def main():
     """
     Función principal que ejecuta los comandos en los hosts remotos de forma asíncrona
     """
     hosts = await asyncio.gather(*[
-        create_connection(host="192.168.1.44", user="pi",
-                          password="raspberry"),
-        create_connection(host="192.168.28.141",
-                          user="victor", password="victor"),
-        create_connection(host="",
-                          user="", key=r"private.key")
+        create_sshhost(host="192.168.1.44", user="pi", password="raspberry"),
+        create_sshhost(host="192.168.28.141",
+                       user="victor", password="victor"),
+        create_sshhost(host="",
+                       user="", key=r"private.key")
     ])
     hosts = list(filter(lambda x: x, hosts))
     tasks = [execute_commands(
@@ -121,12 +130,6 @@ async def main():
     for result in results:
         print(result)
 
-
-async def create_connection(host, user, password=None, key=None, key_pass=None):
-    try:
-        return SSHHost(host=host, user=user, passwd=password, key=key, key_pass=key_pass)
-    except Exception as e:
-        print(f"Error connecting to {host}: {e}")
 
 if __name__ == "__main__":
     parser = ArgumentParser(description="SSH Hosts")
