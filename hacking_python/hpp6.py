@@ -86,7 +86,7 @@ def load_file(file_path):
     :return: Lista de líneas
     :rtype: list
     """
-    f = open(file_path, 'r')
+    f = open(file_path, 'r', encoding="latin-1")
     lines = [l.strip() for l in f.readlines()]
     f.close()
     return lines
