@@ -3,7 +3,19 @@ from ipaddress import IPv4Network
 import asyncio
 from argparse import ArgumentParser
 
-async def arp_scan(src_mac, src_ip, dest_ip):
+async def arp_scan(src_mac: str, src_ip: str, dest_ip: str) -> bool:
+    """
+    Asynchronous ARP scan using scapy
+
+    :param src_mac: Source MAC address
+    :type src_mac: str
+    :param src_ip: Source IP address
+    :type src_ip: str
+    :param dest_ip: Destination IP address
+    :type dest_ip: str
+    :return: True if the IP is alive, False otherwise
+    :rtype: bool
+    """
     ether_packet = Ether(dst=ETHER_BROADCAST)
     arp_packet = ARP(hwsrc=src_mac, hwdst=ETHER_BROADCAST, psrc=src_ip, pdst=dest_ip)
     arp_request = ether_packet/arp_packet
@@ -15,19 +27,28 @@ async def arp_scan(src_mac, src_ip, dest_ip):
         return False
 
 async def main(args):
+    """
+    Main function
+
+    :param args: Arguments
+    :type args: argparse.Namespace
+    """
     src_mac = get_if_hwaddr('eth0')
     src_ip = get_if_addr('eth0')
     try:
+        # Create an IPv4Network object from the target IP or IP range
         if "/" in args.target:
             network = IPv4Network(args.target)
         else:
             network = IPv4Network(f"{args.target}/32")
     except ValueError as e:
-        print(e)
         print("Invalid IP range")
         return
+    # Create a list of coroutines
     tasks = [arp_scan(src_mac, src_ip, str(ip)) for ip in network]
+    # Run the coroutines concurrently
     results = await asyncio.gather(*tasks)
+    # Print the results
     for ip, result in zip(network, results):
         if result:
             print(f"{ip} is alive")
