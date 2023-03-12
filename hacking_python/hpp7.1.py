@@ -63,7 +63,7 @@ def handle_client(conexion, direccion, output, id_zfill=3, buffer_length=1000):
             buffer_ += 1
         else:
             buffer_ = 0
-        print('Se ha recibido el siguiente mensaje:', msg)
+        print(f'Mensaje de {host}:', msg)
 
     # Cerrar la conexión entrante
     conexion.close()
