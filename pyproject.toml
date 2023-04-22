@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "master-python-eip"
+version = "0.1.0"
+description = ""
+authors = ["soytupadrrre <victorluque314@gmail.com>"]
+readme = "README.md"
+packages = [{include = "master_python_eip"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+notebook = "^6.5.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
